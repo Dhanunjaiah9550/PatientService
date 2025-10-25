@@ -1,4 +1,4 @@
-package com.flmhospitals.constants;
+package com.flmhospitals.utils;
 
 public enum Gender {
 	MALE,

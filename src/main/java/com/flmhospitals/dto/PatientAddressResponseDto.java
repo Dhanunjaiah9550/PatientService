@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientAddressResponseDto {
+	
+	private long patientAddressId;
 
 	private String doorNumber;
 	

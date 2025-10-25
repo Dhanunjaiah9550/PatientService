@@ -3,7 +3,7 @@ package com.flmhospitals.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.flmhospitals.constants.Gender;
+import com.flmhospitals.utils.Gender;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
