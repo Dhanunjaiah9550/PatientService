@@ -9,16 +9,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PatientAddressRequestDto {
 
-	private String patientAddressHouseNumber;
+	private String doorNumber;
 	
-	private String patientAddresslandmark;
+	private String landmark;
 	
-	private String patientAddressCity;
+	private String city;
 	
-	private String patientAddressState;
+	private String state;
 	
-	private String patientAddressCountry;
+	private String country;
 	
-	private int patientAddressPinCode;
+	private String pinCode;
 	
 }
