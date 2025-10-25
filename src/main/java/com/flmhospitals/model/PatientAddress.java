@@ -32,4 +32,15 @@ public class PatientAddress {
 
 	private String country;
 
+	public PatientAddress(String doorNumber, String landmark, String city, String state, String pinCode,
+			String country) {
+		super();
+		this.doorNumber = doorNumber;
+		this.landmark = landmark;
+		this.city = city;
+		this.state = state;
+		this.pinCode = pinCode;
+		this.country = country;
+	}
+
 }

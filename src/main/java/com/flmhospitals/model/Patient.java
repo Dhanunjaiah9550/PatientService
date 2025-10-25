@@ -2,6 +2,8 @@ package com.flmhospitals.model;
 
 import java.time.LocalDate;
 
+import com.flmhospitals.utils.Gender;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +29,7 @@ public class Patient {
 
 	private String patientName;
 
-	private String gender;
+	private Gender gender;
 
 	private String patientEmail;
 
