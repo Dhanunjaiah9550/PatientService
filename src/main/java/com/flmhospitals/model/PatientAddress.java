@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "patient_addresses")
+@Table(name = "patients_address")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,13 +22,13 @@ public class PatientAddress {
 
 	private String doorNumber;
 
-	private String street;
+	private String landmark;
 
 	private String city;
 
 	private String state;
 
-	private String postalCode;
+	private String pinCode;
 
 	private String country;
 
