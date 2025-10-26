@@ -25,7 +25,7 @@ public class Patient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String patientId;
+	private long patientId;
 
 	private String patientName;
 
