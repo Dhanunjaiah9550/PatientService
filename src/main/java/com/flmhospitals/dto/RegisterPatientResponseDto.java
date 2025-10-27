@@ -26,6 +26,6 @@ public class RegisterPatientResponseDto {
 	
 	private LocalDate dateOfBirth;
 
-	private List<PatientAddressResponseDto> patientAddress;
+	private PatientAddressResponseDto patientAddress;
 	
 }
