@@ -6,12 +6,14 @@ import java.util.List;
 import com.flmhospitals.utils.Gender;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class RegisterPatientResponseDto {
 	
 	private String patientId;
