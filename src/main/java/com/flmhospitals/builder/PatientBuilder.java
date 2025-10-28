@@ -12,7 +12,7 @@ import com.flmhospitals.model.PatientAddress;
 
 public class PatientBuilder {
 	
-	public static Patient registerPatientFromRegisterPatientRequestDto(RegisterPatientRequestDto registerPatientRequestDto) {
+	public static Patient buildPatientFromRegisterPatientRequestDto(RegisterPatientRequestDto registerPatientRequestDto) {
 		
 		return Patient.builder()
 				.patientName(registerPatientRequestDto.getPatientName() )
