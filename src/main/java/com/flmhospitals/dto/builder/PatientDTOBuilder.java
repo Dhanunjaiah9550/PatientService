@@ -1,7 +1,5 @@
 package com.flmhospitals.dto.builder;
 
-import java.util.Collections;
-
 import com.flmhospitals.dto.PatientAddressResponseDto;
 import com.flmhospitals.dto.RegisterPatientResponseDto;
 import com.flmhospitals.model.Patient;
@@ -19,7 +17,7 @@ public class PatientDTOBuilder {
 		.patientEmail(patient.getPatientEmail())
 		.patientPhoneNumber(patient.getPatientPhoneNumber())
 		.dateOfBirth(patient.getDateOfBirth())
-		.patientAddress(patient.getPatientAddress()!=null ? Collections.singletonList(fromPatientAddressToPatRespDto(patient.getPatientAddress())):Collections.emptyList())
+		.patientAddress(patient.getPatientAddress()!=null ? (fromPatientAddressToPatRespDto(patient.getPatientAddress())): null)
 		.build();
 	}
 	
