@@ -26,6 +26,11 @@ public class PatientIdGenerator {
             
             String numberPart = lastId.substring(8);
             nextNumber = Integer.parseInt(numberPart) + 1;
+            
+            String suffix = String.format("%06d", nextNumber);
+            
+            return prefix + suffix;
+            
         }
 
        

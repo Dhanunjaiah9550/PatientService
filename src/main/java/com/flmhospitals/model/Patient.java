@@ -3,21 +3,23 @@ package com.flmhospitals.model;
 import java.time.LocalDate;
 
 import com.flmhospitals.utils.Gender;
-import com.flmhospitals.utils.PatientIdGenerator;
+import com.flmhospitals.utils.PatientEntityListner;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Entity
 @Table(name = "patients")
@@ -25,6 +27,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EntityListeners(value = PatientEntityListner.class)
 public class Patient {
 
 	@Id
@@ -33,6 +36,7 @@ public class Patient {
 
 	private String patientName;
 
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
 	private String patientEmail;
@@ -45,13 +49,4 @@ public class Patient {
 	@JoinColumn(name = "patient_address_id")
 	private PatientAddress patientAddress;
 	
-	@Transient
-	private PatientIdGenerator patientIdGenerator;
-	
-	@PrePersist
-	public void generateStaffId(){
-		if (this.patientId == null || this.patientId.isEmpty()) {
-			this.patientId = patientIdGenerator.generateNextPatientId(); 
-			} }
-
 }
