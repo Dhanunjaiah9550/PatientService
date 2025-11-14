@@ -15,10 +15,10 @@ import com.flmhospitals.utils.PatientIdGenerator;
 public class PatientServiceImpl implements PatientService {
 
 	public final PatientRepository patientRepository;
-	
+
 	public final PatientIdGenerator patientIdGenerator;
 
-	public PatientServiceImpl(PatientRepository patientRepository,PatientIdGenerator patientIdGenerator) {
+	public PatientServiceImpl(PatientRepository patientRepository, PatientIdGenerator patientIdGenerator) {
 		this.patientRepository = patientRepository;
 		this.patientIdGenerator = patientIdGenerator;
 	}
@@ -32,5 +32,4 @@ public class PatientServiceImpl implements PatientService {
 
 		return PatientDTOBuilder.fromPatientEntityToRegPatientRespDtO(registedPatient);
 	}
-
 }
