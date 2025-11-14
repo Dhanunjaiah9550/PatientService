@@ -1,9 +1,7 @@
 package com.flmhospitals.dto;
 
 import java.time.LocalDate;
-
 import com.flmhospitals.utils.Gender;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

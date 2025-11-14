@@ -1,12 +1,11 @@
 package com.flmhospitals.service.impl;
 
 import org.springframework.stereotype.Service;
-
+import com.flmhospitals.builder.PatientBuilder;
 import com.flmhospitals.dao.PatientRepository;
 import com.flmhospitals.dto.RegisterPatientRequestDto;
 import com.flmhospitals.dto.RegisterPatientResponseDto;
 import com.flmhospitals.dto.builder.PatientDTOBuilder;
-import com.flmhospitals.dto.builder.RegisterpatientRequestDtoBuilder;
 import com.flmhospitals.model.Patient;
 import com.flmhospitals.service.PatientService;
 import com.flmhospitals.utils.PatientIdGenerator;
@@ -25,8 +24,8 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public RegisterPatientResponseDto regiesterPatient(RegisterPatientRequestDto registerPatientRequestDto) {
-
-		Patient patient = RegisterpatientRequestDtoBuilder.buildPatientFromRequestDto(registerPatientRequestDto);
+		
+		Patient patient = PatientBuilder.buildPatientFromRegisterPatientRequestDto(registerPatientRequestDto);
 
 		Patient registedPatient = patientRepository.save(patient);
 
