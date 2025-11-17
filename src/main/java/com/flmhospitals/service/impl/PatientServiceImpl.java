@@ -55,7 +55,6 @@ public class PatientServiceImpl implements PatientService {
 		
 		return PatientDTOBuilder.fromPatientEntityToRegPatientRespDtO(savedPatient);
 		
-		
 	}
 
 	@Override
