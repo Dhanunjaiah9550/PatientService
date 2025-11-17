@@ -40,55 +40,22 @@ public class PatientServiceImpl implements PatientService {
 	public RegisterPatientResponseDto updatePatient(RegisterPatientRequestDto patientRequestDto,
 			String patientId) {
 		
-		Patient patient= patientRepository.findById(patientId).orElseThrow(()->new PatientNotFoundException("No patient found with ID "+patientId));
+		Patient existingPatient= patientRepository.findById(patientId).orElseThrow(()->new PatientNotFoundException("No patient found with ID "+patientId));
 		
-		PatientAddressRequestDto requestAddressDto = patientRequestDto.getPatientAddress();
-	    PatientAddress address = patient.getPatientAddress();
-
-	    if (requestAddressDto != null) {
-
-	        if (requestAddressDto.getDoorNumber() != null) {
-	        	address.setDoorNumber(requestAddressDto.getDoorNumber());
-	        }
-	        if (requestAddressDto.getLandmark() != null) {
-	        	address.setLandmark(requestAddressDto.getLandmark());
-	        }
-	        if (requestAddressDto.getCity() != null) {
-	        	address.setCity(requestAddressDto.getCity());
-	        }
-	        if (requestAddressDto.getState() != null) {
-	        	address.setState(requestAddressDto.getState());
-	        }
-	        if (requestAddressDto.getPinCode() != null) {
-	        	address.setPinCode(requestAddressDto.getPinCode());
-	        }
-	        if (requestAddressDto.getCountry() != null) {
-	        	address.setCountry(requestAddressDto.getCountry());
-	        }
-	    }
-
-	    if (patientRequestDto.getPatientName() != null) {
-	        patient.setPatientName(patientRequestDto.getPatientName());
-	    }
-
-	    if (patientRequestDto.getGender() != null) {
-	        patient.setGender(patientRequestDto.getGender());
-	    }
-
-	    if (patientRequestDto.getPatientEmail() != null) {
-	        patient.setPatientEmail(patientRequestDto.getPatientEmail());
-	    }
-
-	    if (patientRequestDto.getPatientPhoneNumber() != null) {
-	        patient.setPatientPhoneNumber(patientRequestDto.getPatientPhoneNumber());
-	    }
-
-	    if (patientRequestDto.getDateOfBirth() != null) {
-	        patient.setDateOfBirth(patientRequestDto.getDateOfBirth());
-	    }
-
-	    Patient updatedPatient = patientRepository.save(patient);
-	    return PatientDTOBuilder.fromPatientEntityToRegPatientRespDtO(updatedPatient);
+		Patient updatedPatient=PatientBuilder.buildPatientFromRegisterPatientRequestDto(patientRequestDto);
+		
+		updatedPatient.setPatientId(patientId);
+		
+		if(existingPatient.getPatientAddress()!=null && updatedPatient.getPatientAddress() !=null) {
+			
+			updatedPatient.getPatientAddress().setPatientAddressId(existingPatient.getPatientAddress().getPatientAddressId());
+		}
+		
+		Patient savedPatient= patientRepository.save(updatedPatient);
+		
+		return PatientDTOBuilder.fromPatientEntityToRegPatientRespDtO(savedPatient);
+		
+		
 	}
 
 	@Override

@@ -41,8 +41,6 @@ public class PatientController {
 		RegisterPatientResponseDto updatedPatientResponse =patientService.updatePatient(registerPatientRequestDto, patientId);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(updatedPatientResponse);
-		//return ResponseEntity.ok(updatedPatientResponse);
-		
 		
 	}
 	
