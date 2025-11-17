@@ -90,5 +90,14 @@ public class PatientServiceImpl implements PatientService {
 	    Patient updatedPatient = patientRepository.save(patient);
 	    return PatientDTOBuilder.fromPatientEntityToRegPatientRespDtO(updatedPatient);
 	}
+
+	@Override
+	public RegisterPatientResponseDto getPatientById(String patientId) {
+		// TODO Auto-generated method stub
+		
+		Patient patient=patientRepository.findById(patientId).orElseThrow(()->new PatientNotFoundException("No patient found with ID "+patientId));
+		
+		return PatientDTOBuilder.fromPatientEntityToRegPatientRespDtO(patient);
+	}
 	
 }

@@ -9,4 +9,6 @@ public interface PatientService {
 	
 	RegisterPatientResponseDto updatePatient(RegisterPatientRequestDto patientRequestDto ,String patientId);
 	
+	RegisterPatientResponseDto getPatientById(String patientId);
+	
 }

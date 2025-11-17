@@ -2,6 +2,7 @@ package com.flmhospitals.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,6 +43,15 @@ public class PatientController {
 		return ResponseEntity.status(HttpStatus.OK).body(updatedPatientResponse);
 		//return ResponseEntity.ok(updatedPatientResponse);
 		
+		
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<RegisterPatientResponseDto> getPatientById(@PathVariable(name="id") String patientId){
+		
+		RegisterPatientResponseDto patientResponse=patientService.getPatientById(patientId);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(patientResponse);
 		
 	}
 }
