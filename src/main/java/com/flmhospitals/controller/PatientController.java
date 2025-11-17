@@ -2,10 +2,14 @@ package com.flmhospitals.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.flmhospitals.dto.RegisterPatientRequestDto;
 import com.flmhospitals.dto.RegisterPatientResponseDto;
 import com.flmhospitals.service.PatientService;
@@ -29,5 +33,23 @@ public class PatientController {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(regiesterPatientResponse);
 
+	}
+	
+	@PutMapping("/update/{id}")
+	public ResponseEntity<RegisterPatientResponseDto> updatePatient(@RequestBody  RegisterPatientRequestDto registerPatientRequestDto, @PathVariable(name="id") String patientId){
+		
+		RegisterPatientResponseDto updatedPatientResponse =patientService.updatePatient(registerPatientRequestDto, patientId);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(updatedPatientResponse);
+		
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<RegisterPatientResponseDto> getPatientById(@PathVariable(name="id") String patientId){
+		
+		RegisterPatientResponseDto patientResponse=patientService.getPatientById(patientId);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(patientResponse);
+		
 	}
 }
