@@ -23,14 +23,22 @@ public class PatientIdGenerator {
         int nextNumber = 1;
 
         if (lastId != null) {
+            String lastIdDate = lastId.substring(0,8);
             
-            String numberPart = lastId.substring(8);
-            nextNumber = Integer.parseInt(numberPart) + 1;
-            
-            String suffix = String.format("%06d", nextNumber);
-            
-            return prefix + suffix;
-            
+            if (prefix.equals(lastIdDate)) {
+            	String numberPart = lastId.substring(8);
+                nextNumber = Integer.parseInt(numberPart) + 1;
+                
+                String suffix = String.format("%06d", nextNumber);
+                
+                return prefix + suffix;
+            }
+            else {
+            	int firstPatientNumber = 1;
+            	String suffix = String.format("%06d", firstPatientNumber);
+            	            	
+            	return prefix + suffix;
+            }
         }
 
        
