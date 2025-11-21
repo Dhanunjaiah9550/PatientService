@@ -1,5 +1,8 @@
 package com.flmhospitals.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.flmhospitals.clients.AppointmentClient;
 import com.flmhospitals.dto.RegisterPatientRequestDto;
 import com.flmhospitals.dto.RegisterPatientResponseDto;
+import com.flmhospitals.model.Patient;
 import com.flmhospitals.service.PatientService;
 
 @RestController
@@ -19,9 +23,15 @@ import com.flmhospitals.service.PatientService;
 public class PatientController {
 	
 	public final PatientService patientService;
+	
+	public final AppointmentClient appointmentClient;
 
-	public PatientController(PatientService patientService) {
+
+	public PatientController(PatientService patientService,AppointmentClient appointmentClient) {
+		
 		this.patientService = patientService;
+		
+		this.appointmentClient = appointmentClient;
 	}
 
 	@PostMapping("/register")
@@ -50,6 +60,19 @@ public class PatientController {
 		RegisterPatientResponseDto patientResponse=patientService.getPatientById(patientId);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(patientResponse);
+		
+	}
+	
+	@GetMapping("/getDoctorPatients/{staffId}/{startDate}/{endDate}")
+	public List<Patient> getPatientsVisitedByDoctor(@PathVariable(name="staffId") String staffId, @PathVariable("startDate") LocalDate startDate,@PathVariable("endDate") LocalDate endDate){
+
+		String startdate = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		String enddate = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		List<String> listOfPatientIds = appointmentClient.getPatientsVisitedByDoctor(staffId, startdate, enddate);
+		
+		return patientService.getPatientsByDoctor(listOfPatientIds);
 		
 	}
 }

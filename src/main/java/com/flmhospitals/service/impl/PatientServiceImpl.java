@@ -1,16 +1,14 @@
 package com.flmhospitals.service.impl;
 
+import java.util.List;
 import org.springframework.stereotype.Service;
-
 import com.flmhospitals.builder.PatientBuilder;
 import com.flmhospitals.dao.PatientRepository;
-import com.flmhospitals.dto.PatientAddressRequestDto;
 import com.flmhospitals.dto.RegisterPatientRequestDto;
 import com.flmhospitals.dto.RegisterPatientResponseDto;
 import com.flmhospitals.dto.builder.PatientDTOBuilder;
 import com.flmhospitals.exception.PatientNotFoundException;
 import com.flmhospitals.model.Patient;
-import com.flmhospitals.model.PatientAddress;
 import com.flmhospitals.service.PatientService;
 import com.flmhospitals.utils.PatientIdGenerator;
 
@@ -64,6 +62,14 @@ public class PatientServiceImpl implements PatientService {
 		Patient patient=patientRepository.findById(patientId).orElseThrow(()->new PatientNotFoundException("No patient found with ID "+patientId));
 		
 		return PatientDTOBuilder.fromPatientEntityToRegPatientRespDtO(patient);
+	}
+
+	@Override
+	public List<Patient> getPatientsByDoctor(List<String> listOfPatientIds) {
+		
+		List<Patient> patients = patientRepository.findBypatientIdIn(listOfPatientIds);
+
+		return patients;
 	}
 	
 }

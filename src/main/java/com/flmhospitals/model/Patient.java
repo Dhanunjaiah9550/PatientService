@@ -1,7 +1,6 @@
 package com.flmhospitals.model;
 
 import java.time.LocalDate;
-
 import com.flmhospitals.utils.Gender;
 import com.flmhospitals.utils.PatientEntityListner;
 import jakarta.persistence.CascadeType;
