@@ -1,8 +1,13 @@
 package com.flmhospitals.service.impl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import com.flmhospitals.builder.PatientBuilder;
+import com.flmhospitals.clients.AppointmentClient;
 import com.flmhospitals.dao.PatientRepository;
 import com.flmhospitals.dto.RegisterPatientRequestDto;
 import com.flmhospitals.dto.RegisterPatientResponseDto;
@@ -18,10 +23,16 @@ public class PatientServiceImpl implements PatientService {
 	public final PatientRepository patientRepository;
 
 	public final PatientIdGenerator patientIdGenerator;
+	
+	public final AppointmentClient appointmentClient;
 
-	public PatientServiceImpl(PatientRepository patientRepository, PatientIdGenerator patientIdGenerator) {
+	public PatientServiceImpl(PatientRepository patientRepository, PatientIdGenerator patientIdGenerator, AppointmentClient appointmentClient) {
+	
 		this.patientRepository = patientRepository;
+		
 		this.patientIdGenerator = patientIdGenerator;
+		
+		this.appointmentClient = appointmentClient;
 	}
 
 	@Override
@@ -70,6 +81,17 @@ public class PatientServiceImpl implements PatientService {
 		List<Patient> patients = patientRepository.findBypatientIdIn(listOfPatientIds);
 
 		return patients;
+	}
+
+	@Override
+	public List<String> getPatientsVisitedByDoctor(String staffId, LocalDate startDate, LocalDate endDate) {
+		
+        String startdate = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		String enddate = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		return appointmentClient.getPatientsVisitedByDoctor(staffId, startdate, enddate);
+		
 	}
 	
 }

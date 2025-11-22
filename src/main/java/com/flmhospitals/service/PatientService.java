@@ -1,5 +1,6 @@
 package com.flmhospitals.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.flmhospitals.dto.RegisterPatientRequestDto;
@@ -15,5 +16,7 @@ public interface PatientService {
 	RegisterPatientResponseDto getPatientById(String patientId);
 
 	List<Patient> getPatientsByDoctor(List<String> listOfPatientIds);
+
+	List<String> getPatientsVisitedByDoctor(String staffId, LocalDate startDate, LocalDate endDate);
 	
 }
