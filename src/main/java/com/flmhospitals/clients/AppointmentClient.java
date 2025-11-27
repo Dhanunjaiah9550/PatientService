@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name="AppointmentManagement")
 public interface AppointmentClient {
 
-	@GetMapping("/appointments/getDoctorPatients/{staffId}/{startDate}/{endDate}")
+	@GetMapping("/appointments/getDoctorPatients/{staffId}")
 	public List<String> getPatientsVisitedByDoctor(@PathVariable(name="staffId") String staffId, @RequestParam("startDate") String startdate,@RequestParam("endDate") String enddate);
 }
