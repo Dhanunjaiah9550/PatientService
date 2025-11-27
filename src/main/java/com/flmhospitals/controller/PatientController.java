@@ -1,5 +1,7 @@
 package com.flmhospitals.controller;
 
+import java.time.LocalDate;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,10 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.flmhospitals.dto.RegisterPatientRequestDto;
 import com.flmhospitals.dto.RegisterPatientResponseDto;
+import com.flmhospitals.model.Patient;
 import com.flmhospitals.service.PatientService;
 
 @RestController
@@ -20,7 +23,9 @@ public class PatientController {
 	
 	public final PatientService patientService;
 
+
 	public PatientController(PatientService patientService) {
+		
 		this.patientService = patientService;
 	}
 
@@ -50,6 +55,15 @@ public class PatientController {
 		RegisterPatientResponseDto patientResponse=patientService.getPatientById(patientId);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(patientResponse);
+		
+	}
+	
+	@GetMapping("/getDoctorPatients/{staffId}")
+	public List<Patient> getPatientsVisitedByDoctor(@PathVariable(name="staffId") String staffId, @RequestParam("startDate") LocalDate startDate, @RequestParam("endDate") LocalDate endDate){
+		
+		List<String> listOfPatientIds = patientService.getPatientsVisitedByDoctor(staffId,startDate,endDate);
+		
+		return patientService.getPatientsByDoctor(listOfPatientIds);
 		
 	}
 }
