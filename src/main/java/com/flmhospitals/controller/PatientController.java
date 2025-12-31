@@ -66,4 +66,10 @@ public class PatientController {
 		return patientService.getPatientsByDoctor(listOfPatientIds);
 		
 	}
+	
+	@GetMapping("/getPatientName/{patientId}")
+	String getPatientName(@PathVariable(name="patientId") String patientId) {
+		
+		return patientService.getPatientName(patientId);
+	}
 }

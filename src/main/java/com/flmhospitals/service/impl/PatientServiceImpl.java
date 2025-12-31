@@ -91,7 +91,14 @@ public class PatientServiceImpl implements PatientService {
 		String enddate = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		
 		return appointmentClient.getPatientsVisitedByDoctor(staffId, startdate, enddate);
+	}
 		
+	@Override	
+	public String getPatientName(String patientId) {
+		
+		Patient patient=patientRepository.findById(patientId).orElseThrow(()->new PatientNotFoundException("No patient found with ID "+patientId));
+		
+		return patient.getPatientName();
 	}
 	
 }

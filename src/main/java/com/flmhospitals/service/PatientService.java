@@ -18,5 +18,7 @@ public interface PatientService {
 	List<Patient> getPatientsByDoctor(List<String> listOfPatientIds);
 
 	List<String> getPatientsVisitedByDoctor(String staffId, LocalDate startDate, LocalDate endDate);
+
+	String getPatientName(String patientId);
 	
 }
