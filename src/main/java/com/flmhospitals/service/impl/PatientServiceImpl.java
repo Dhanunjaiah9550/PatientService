@@ -100,5 +100,14 @@ public class PatientServiceImpl implements PatientService {
 		
 		return patient.getPatientName();
 	}
+
+	@Override
+	public List<RegisterPatientResponseDto> getAllPatients() {
+		
+		List<Patient> allPatients = patientRepository.findAll();
+		
+		return PatientDTOBuilder.fromListOfPatientToListOfRegPatientRespDto(allPatients);
+		
+	}
 	
 }

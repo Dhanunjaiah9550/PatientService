@@ -1,5 +1,7 @@
 package com.flmhospitals.dto.builder;
 
+import java.util.List;
+
 import com.flmhospitals.dto.PatientAddressResponseDto;
 import com.flmhospitals.dto.RegisterPatientResponseDto;
 import com.flmhospitals.model.Patient;
@@ -31,6 +33,11 @@ public class PatientDTOBuilder {
 		.country(patientAddress.getCountry())
 		.pinCode(patientAddress.getPinCode())
 		.build();
+	}
+	
+	public static List<RegisterPatientResponseDto> fromListOfPatientToListOfRegPatientRespDto(List<Patient> patients){
+		
+		return patients.stream().map(patient -> fromPatientEntityToRegPatientRespDtO(patient)).toList();
 	}
 	
 	
