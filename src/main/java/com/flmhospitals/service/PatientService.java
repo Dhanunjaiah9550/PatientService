@@ -8,6 +8,8 @@ import com.flmhospitals.dto.RegisterPatientResponseDto;
 import com.flmhospitals.model.Patient;
 
 public interface PatientService {
+	
+	List<RegisterPatientResponseDto> getAllPatients();
 
 	RegisterPatientResponseDto regiesterPatient(RegisterPatientRequestDto registerPatientRequestDto);
 	
