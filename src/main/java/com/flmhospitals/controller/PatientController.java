@@ -18,7 +18,6 @@ import com.flmhospitals.dto.RegisterPatientResponseDto;
 import com.flmhospitals.model.Patient;
 import com.flmhospitals.service.PatientService;
 
-@CrossOrigin(origins = "*")
 @RestController  
 @RequestMapping("/patients")
 public class PatientController {
